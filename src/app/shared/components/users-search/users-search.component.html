@@ -1,0 +1,23 @@
+<div class="form-control users-search">
+  <input
+    type="text"
+    (keyup.enter)="search()"
+    (keyup.escape)="discharge()"
+    (input)="searchValue || clear()"
+    [(ngModel)]="searchValue"
+    (ngModelChange)="onSearchChange($event)"
+    placeholder="Введите имя пользователя..."
+  >
+
+  <app-button
+    class="search-btn"
+    content="Поиск"
+    (click)="search()"
+  ></app-button>
+
+  <app-button
+    class="reset-search-btn"
+    content="Сброс"
+    (click)="discharge()"
+  ></app-button>
+</div>

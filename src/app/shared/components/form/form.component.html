@@ -1,0 +1,140 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <h1>{{formTitle}}</h1>
+
+  <app-button
+    class="back"
+    content="Назад"
+    [asA]="true"
+    [path]="'/users'"
+  ></app-button>
+
+  <div class="control-wrap">
+    <div class="form-control">
+      <label for="login">Логин</label>
+      <input id="login" type="text" placeholder="Введите логин..." formControlName="login">
+      <div
+        *ngIf="form.get('login').touched && form.get('login').invalid"
+        class="validation"
+      >
+        <small *ngIf="form.get('login').errors.required">
+          Заполните поле логина.
+        </small>
+
+        <small *ngIf="form.get('login').errors.minlength">
+          Минимальная длинна логина {{form.get('login').errors.minlength.requiredLength}} символов.
+          Сейчас {{form.get('login').errors.minlength.actualLength}} символов.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <label for="fio">ФИО</label>
+      <input id="fio" type="text" placeholder="Введите ФИО..." formControlName="fio">
+      <div
+        *ngIf="form.get('fio').touched && form.get('fio').invalid"
+        class="validation"
+      >
+        <small *ngIf="form.get('fio').errors.required">
+          Заполните поле ФИО.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <label for="password">Новый пароль</label>
+      <input
+        id="password"
+        type="password"
+        placeholder="Введите новый пароль..."
+        formControlName="password"
+      >
+      <div
+        *ngIf="form.get('password').touched && form.get('password').invalid"
+        class="validation"
+      >
+        <small *ngIf="form.get('password').errors.required">
+          Заполните поле пароля.
+        </small>
+
+        <small *ngIf="form.get('password').errors.minlength">
+          Минимальная длинна пароля {{form.get('password').errors.minlength.requiredLength}} символов.
+          Сейчас {{form.get('password').errors.minlength.actualLength}} символов.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <label for="repeatPassword">Повторите пароль</label>
+      <input
+        id="repeatPassword"
+        type="password"
+        placeholder="Повторите пароль..."
+        formControlName="repeatPassword"
+      >
+      <div
+        *ngIf="form.get('repeatPassword').touched && form.get('repeatPassword').invalid"
+        class="validation"
+      >
+        <small *ngIf="form.get('repeatPassword').errors.required">
+          Заполните поле пароля.
+        </small>
+
+        <small *ngIf="form.get('repeatPassword').errors.minlength">
+          Минимальная длинна пароля {{form.get('repeatPassword').errors.minlength.requiredLength}} символов.
+          Сейчас {{form.get('repeatPassword').errors.minlength.actualLength}} символов.
+        </small>
+
+        <small *ngIf="form.get('repeatPassword').errors.passwordMatch">
+          Пароли должны совпадать.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-control datepicker">
+      <label [for]="picker">Дата рождения</label>
+      <mat-form-field appearance="fill">
+        <input
+          matInput
+          formControlName="birthday"
+          [matDatepicker]="picker"
+          [max]="tomorrow"
+          placeholder="дд/мм/гггг"
+          disabled
+        >
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker disabled="false"></mat-datepicker>
+        <div
+          *ngIf="form.get('birthday').untouched"
+          class="validation date-validation"
+        >
+          <small *ngIf="form.get('birthday').errors.required">
+            Кликните на иконку, чтобы выбрать дату рождения.
+          </small>
+        </div>
+      </mat-form-field>
+    </div>
+
+    <div class="form-control">
+      <label for="role">Роль</label>
+      <select name="role" id="role" formControlName="role">
+        <option value="Admin">Admin</option>
+        <option value="User">User</option>
+      </select>
+      <div
+        *ngIf="form.get('role').touched && form.get('role').invalid"
+        class="validation"
+      >
+        <small *ngIf="form.get('role').errors.required">
+          Выберите роль пользователя.
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <app-button
+    class="submit-form-btn"
+    content="{{formBtnTitle}}"
+    type="submit"
+    [disabled]="form.invalid || submitted"
+  ></app-button>
+</form>

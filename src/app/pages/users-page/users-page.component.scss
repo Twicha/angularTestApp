@@ -1,0 +1,81 @@
+.users-page {
+  margin: 0 auto;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .tools {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .form-control {
+      display: flex;
+
+      input {
+        margin: 0;
+        width: 200px;
+      }
+
+      .search {
+        margin: 0 1rem;
+      }
+    }
+  }
+
+  table {
+    width: 100%;
+    border: 2px solid black;
+    border-spacing: 0px;
+
+    th, td {
+      border-right: 2px solid black;
+      text-align: start;
+
+      &:last-child {
+        border: none;
+      }
+    }
+
+    th {
+      padding: .1rem;
+      cursor: pointer;
+    }
+
+    td {
+      padding: .25rem;
+    }
+
+    thead {
+      background: #c0c0c0;
+    }
+
+    tbody {
+
+      .edit-btn {
+        cursor: pointer;
+        transition: .3s;
+
+        &.edit {
+          margin: 0 .5rem 0 0;
+          color: blue;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        &.delete:hover {
+          color: red;
+        }
+      }
+
+      tr:nth-child(odd) {
+        background: #f6f6f6;
+      }
+    }
+  }
+}

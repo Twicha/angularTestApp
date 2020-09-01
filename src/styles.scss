@@ -1,0 +1,164 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$testApp-primary: mat-palette($mat-indigo);
+$testApp-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$testApp-warn: mat-palette($mat-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$testApp-theme: mat-light-theme((
+  color: (
+    primary: $testApp-primary,
+    accent: $testApp-accent,
+    warn: $testApp-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($testApp-theme);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.form-control {
+
+  label {
+    display: block;
+  }
+
+  input, select {
+    margin: .5rem 0;
+    padding: 5px;
+    width: 100%;
+    border: 2px solid black;
+    outline: none;
+
+    &.ng-invalid.ng-touched {
+      border: 2px solid red;
+    }
+
+    &:focus {
+      border-radius: 0px;
+      border: 2px solid dodgerblue;
+    }
+  }
+}
+
+select {
+  cursor: pointer;
+}
+
+.validation {
+  color: red;
+}
+
+.alert {
+  padding: 1rem;
+
+  &.alert-danger {
+    background: red;
+    color: white;
+  }
+
+  &.alert-info {
+    background: #eaeaea;
+    color: black;
+  }
+}
+
+.user-page {
+  margin: 0 auto;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .back {
+      align-self: flex-start;
+    }
+
+    .submit-form-btn {
+      align-self: flex-end;
+    }
+
+    .control-wrap {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      app-form-control, .datepicker, .select-role {
+        margin: .5rem 0;
+        width: 49%;
+      }
+      .form-control {
+
+      }
+    }
+  }
+}
+
+mat-form-field {
+  padding: 0;
+  width: 100%;
+
+  .mat-form-field-wrapper {
+    padding: 0;
+
+    .mat-form-field-flex {
+      padding: 0 !important;
+      background: transparent !important;
+      display: flex;
+      align-items: center;
+
+      .mat-form-field-infix {
+        padding: 0 !important;
+        border: none;
+      }
+    }
+
+    .mat-form-field-underline {
+      display: none;
+    }
+  }
+
+  .date-validation {
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    small {
+      color: black;
+    }
+  }
+}
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow-y: scroll;}

@@ -1,0 +1,91 @@
+<div class="users-page page">
+
+  <h1>Список пользователей</h1>
+
+  <div class="tools">
+    <app-button
+      class="create-new-user"
+      content="Добавить пользователя"
+      [asA]="true"
+      [path]="'/create'"
+    ></app-button>
+
+    <app-users-search
+      [search]="search"
+      [discharge]="discharge"
+      [clear]="clear"
+      [searchValue]="searchValue"
+      (searchChange)="searchChange($event)"
+    ></app-users-search>
+
+<!--    <div class="form-control users-search">-->
+<!--      <input-->
+<!--        type="text"-->
+<!--        (keyup.enter)="search()"-->
+<!--        (keyup.escape)="discharge()"-->
+<!--        (input)="searchValue || clear()"-->
+<!--        placeholder="Введите имя пользователя..."-->
+<!--        [(ngModel)]="searchValue"-->
+<!--      >-->
+
+<!--      <app-button-->
+<!--        class="search-btn"-->
+<!--        content="Поиск"-->
+<!--        (click)="search()"-->
+<!--      ></app-button>-->
+
+<!--      <app-button-->
+<!--        class="reset-search-btn"-->
+<!--        content="Сброс"-->
+<!--        (click)="discharge()"-->
+<!--      ></app-button>-->
+<!--    </div>-->
+  </div>
+
+
+
+  <p *ngIf="loading">Идёт загрузка пользователей...</p>
+
+  <p *ngIf="notFound; else table">Таких пользователей не было найдено...</p>
+
+  <ng-template #table>
+    <table *ngIf="users.length; else noUsers">
+      <thead>
+      <tr>
+        <th (click)="sort('fio')">Имя</th>
+        <th (click)="sort('birthday')">Возраст</th>
+        <th (click)="sort('login')">Логин</th>
+        <th (click)="sort('role')">Роль</th>
+        <th>Действия</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr  *ngFor="let user of searchUsers || users; let idx = index">
+        <td>{{user.fio}}</td>
+        <td>{{user.birthday | coundBd}}</td>
+        <td>{{user.login}}</td>
+        <td>{{user.role}}</td>
+        <td>
+          <a
+            class="edit-btn edit"
+            [routerLink]="['/user', user.id, 'edit']"
+          >
+            Изменить
+          </a>
+          <a
+            class="edit-btn delete"
+            (click)="remove(user.id)"
+          >
+            Удалить
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </ng-template>
+
+  <ng-template #noUsers>
+    <p *ngIf="!loading">Список пользователей пуст...</p>
+  </ng-template>
+
+</div>

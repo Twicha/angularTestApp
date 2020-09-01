@@ -1,0 +1,9 @@
+
+<div
+  class="form-control"
+  [formGroup]="form"
+>
+  <label for="{{name}}">{{title}}</label>
+  <input id="{{name}}" type="{{type}}" placeholder="{{placeholder}}" formControlName="{{name}}">
+  <ng-content></ng-content>
+</div>

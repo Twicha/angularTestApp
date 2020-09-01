@@ -1,0 +1,17 @@
+<button
+  *ngIf="!asA; else a"
+  class="btn"
+  type="{{type}}"
+  [disabled]="disabled"
+>
+  {{content}}
+</button>
+
+<ng-template #a>
+  <a
+    class="btn"
+    routerLink="{{path}}"
+  >
+    {{content}}
+  </a>
+</ng-template>

@@ -1,0 +1,12 @@
+
+<div class="main-container">
+  <app-button
+    *ngIf="authService.isAuthenticated()"
+    class="logout"
+    content="Выход"
+    (click)="logout()"
+  ></app-button>
+
+  <router-outlet></router-outlet>
+
+</div>
